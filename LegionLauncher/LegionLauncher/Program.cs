@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace LegionLauncher
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// The main entry point for the launcher.
         /// </summary>
         [STAThread]
         static void Main()
