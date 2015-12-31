@@ -32,7 +32,11 @@ namespace LegionLauncher
             this.mods = new System.Windows.Forms.TabPage();
             this.armaPath = new System.Windows.Forms.Label();
             this.currentModsViewBox = new System.Windows.Forms.ListBox();
+            this.serverNamePlaceholder = new System.Windows.Forms.Label();
+            this.playersPlaceholder = new System.Windows.Forms.Label();
+            this.serverOneLaunchButton = new System.Windows.Forms.Button();
             this.mainTabControl.SuspendLayout();
+            this.servers.SuspendLayout();
             this.mods.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,8 +53,11 @@ namespace LegionLauncher
             // 
             // servers
             // 
-            this.servers.BackColor = System.Drawing.Color.Black;
+            this.servers.BackColor = System.Drawing.Color.Transparent;
             this.servers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.servers.Controls.Add(this.serverOneLaunchButton);
+            this.servers.Controls.Add(this.playersPlaceholder);
+            this.servers.Controls.Add(this.serverNamePlaceholder);
             this.servers.Location = new System.Drawing.Point(4, 22);
             this.servers.Name = "servers";
             this.servers.Padding = new System.Windows.Forms.Padding(3);
@@ -91,6 +98,38 @@ namespace LegionLauncher
             this.currentModsViewBox.Size = new System.Drawing.Size(513, 316);
             this.currentModsViewBox.TabIndex = 1;
             // 
+            // serverNamePlaceholder
+            // 
+            this.serverNamePlaceholder.AutoSize = true;
+            this.serverNamePlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.serverNamePlaceholder.Location = new System.Drawing.Point(3, 42);
+            this.serverNamePlaceholder.Name = "serverNamePlaceholder";
+            this.serverNamePlaceholder.Size = new System.Drawing.Size(323, 31);
+            this.serverNamePlaceholder.TabIndex = 0;
+            this.serverNamePlaceholder.Text = "Server Name Placeholder";
+            this.serverNamePlaceholder.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // playersPlaceholder
+            // 
+            this.playersPlaceholder.AutoSize = true;
+            this.playersPlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playersPlaceholder.Location = new System.Drawing.Point(8, 73);
+            this.playersPlaceholder.Name = "playersPlaceholder";
+            this.playersPlaceholder.Size = new System.Drawing.Size(202, 25);
+            this.playersPlaceholder.TabIndex = 2;
+            this.playersPlaceholder.Text = "players Placeholder";
+            this.playersPlaceholder.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // serverOneLaunchButton
+            // 
+            this.serverOneLaunchButton.Location = new System.Drawing.Point(366, 42);
+            this.serverOneLaunchButton.Name = "serverOneLaunchButton";
+            this.serverOneLaunchButton.Size = new System.Drawing.Size(122, 56);
+            this.serverOneLaunchButton.TabIndex = 3;
+            this.serverOneLaunchButton.Text = "PLAY!";
+            this.serverOneLaunchButton.UseVisualStyleBackColor = true;
+            this.serverOneLaunchButton.Click += new System.EventHandler(this.serverOneLaunchButton_Click);
+            // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(521, 547);
@@ -99,6 +138,8 @@ namespace LegionLauncher
             this.Name = "MainForm";
             this.Text = "Legion ARMA Launcher";
             this.mainTabControl.ResumeLayout(false);
+            this.servers.ResumeLayout(false);
+            this.servers.PerformLayout();
             this.mods.ResumeLayout(false);
             this.mods.PerformLayout();
             this.ResumeLayout(false);
@@ -112,6 +153,9 @@ namespace LegionLauncher
         private System.Windows.Forms.TabPage mods;
         private System.Windows.Forms.Label armaPath;
         private System.Windows.Forms.ListBox currentModsViewBox;
+        private System.Windows.Forms.Label serverNamePlaceholder;
+        private System.Windows.Forms.Label playersPlaceholder;
+        private System.Windows.Forms.Button serverOneLaunchButton;
     }
 }
 
