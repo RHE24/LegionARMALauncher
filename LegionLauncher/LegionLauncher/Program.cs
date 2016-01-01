@@ -1,14 +1,14 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LegionLauncher
@@ -52,7 +52,7 @@ namespace LegionLauncher
                 return "Could not find ARMA directory";
             }
             return arma_path;
-            //Process the ARMA directory
+            
             
         }
         static List<string> getMods(string arma_path)
@@ -68,6 +68,8 @@ namespace LegionLauncher
             }
             return mods;
         }
+
+        
         static ArmA3ServerInfo getServerInfo(string ipAddr, int port)
         {
             ArmA3ServerInfo taviServer1 = new ArmA3ServerInfo(ipAddr, port);
