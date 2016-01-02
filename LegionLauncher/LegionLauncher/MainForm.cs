@@ -14,47 +14,25 @@ namespace LegionLauncher
 {
     public partial class MainForm : Form
     {
-        delegate void SetTextCallback(string text);
-        private delegate void AddItemCallback(Boolean verified, int index);
         string MAINARMAPATH;
-        Thread verification;
-        string[] serverModHashes;
-        List<string> modList;
-        List<string> modHashes;
-        Thread downloadHashes;
-        Thread modHashChecker;
+        Thread downloadInfoFromServer;
+        Thread verify;
+        string[] modListWithHashes;
+        List<string> modListFromServer;
+        List<string> modHashesFromServer;
         string MOD_HASH_DOWNLOAD_LINK = "https://drive.google.com/uc?export=download&id=0BzpVa7TGxQTBLXJ0S19ZR21nVUU";
-        public MainForm(String arma_Path, List<string> currentInstalledMods, int maxPlayers, int numPlayers)
+        public MainForm(String arma_Path, int maxPlayers, int numPlayers)
         {
             InitializeComponent();
+            ThreadPool.SetMaxThreads(2, 2);
+            modListFromServer = new List<string>();
+            modHashesFromServer = new List<string>();
+            downloadInfoFromServer = new Thread(new ThreadStart(downloadModListFromServer));
+            downloadInfoFromServer.Start();
             MAINARMAPATH = arma_Path;
             this.armaPath.Text = arma_Path;
-            currentModsListBox.View = View.Details;
-            currentModsListBox.Columns.Add("Mod");
-            modList = new List<string>();
-            modHashes = currentInstalledMods;
-            foreach (string mod in currentInstalledMods)
-            {
-                modList.Add(mod);
-                currentModsListBox.Items.Add(mod);
-            }
             this.serverNamePlaceholder.Text = "LEGION Taviana Server 1";
-            this.playersPlaceholder.Text =  numPlayers + "\\" + maxPlayers + " players online";
-        }
-
-        private void mods_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
+            this.playersPlaceholder.Text = numPlayers + "\\" + maxPlayers + " players online";
         }
 
         private void serverOneLaunchButton_Click(object sender, EventArgs e)
@@ -63,69 +41,30 @@ namespace LegionLauncher
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C \"" + MAINARMAPATH + "arma3.exe\" -nosplash -mod=AllInArmaTerrainPack;Exile;RHSAFRF;RHSUSAF;TavianaA3 -connect=158.69.118.212 -port=2318";
+            startInfo.Arguments = "/C \"" + MAINARMAPATH + "arma3.exe\" -nosplash -mod=AllInArmaTerrainPack;Exile;RHSAFRF;RHSUSAF;TavianaA3;ASDG_JR;CUP_Weapons -connect=158.69.118.212 -port=2318";
             process.StartInfo = startInfo;
             process.Start();
         }
 
-        private void verifyModsButton_Click(object sender, EventArgs e)
-        {
-            this.verifyModsButton.Text = "VERIFYING MODS\nPLEASE WAIT!";
-            verification = new Thread(new ThreadStart(verifyWrapper));
-            verification.Start();
-            downloadHashes = new Thread(new ThreadStart(downloadModHashes));
-            downloadHashes.Start();
-            modHashChecker = new Thread(new ThreadStart(modHashCheck));
-            modHashChecker.Start();
-        }
-
-        private void modHashCheck()
-        {
-            downloadHashes.Join();
-            for(int x = 0; x < serverModHashes.Length; x++)
-            {
-                Console.WriteLine(modList[x]);
-                Console.WriteLine(serverModHashes[x]);
-                if (serverModHashes[x].Contains(modList[x])) {
-                    if (serverModHashes[x].Contains(modHashes[x]))
-                    {
-                        Console.WriteLine("hash check match");
-                        AddItem(true, x);
-                    }
-                    else
-                    {
-                        Console.WriteLine("hash check non-match");
-                        AddItem(false, x);
-                    }
-                }
-            }
-        }
-
-        private void downloadModHashes()
+        private void downloadModListFromServer()
         {
             WebClient webClient = new WebClient();
-            webClient.DownloadFile(MOD_HASH_DOWNLOAD_LINK, MAINARMAPATH+ "\\modHashes.txt");
-            string[] lines = System.IO.File.ReadAllLines(MAINARMAPATH + "\\modHashes.txt");
-            //Console.WriteLine("Contents of WriteLines2.txt = ");
-            foreach (string line in lines)
-            {
-                //Console.WriteLine("\t" + line);
-            }
-            serverModHashes = lines;
-            verification.Join();
-            SetText("VERIFICATION\nCOMPLETE");
+            webClient.DownloadFile(MOD_HASH_DOWNLOAD_LINK, MAINARMAPATH + "\\modListWithHashes.txt");
+            modListWithHashes = System.IO.File.ReadAllLines(MAINARMAPATH + "\\modListWithHashes.txt");
+            formatDataFromServerList();
         }
 
-        private void verifyWrapper()
+        public void formatDataFromServerList()
         {
-            for(int x = 0; x< modList.Count; x++)
+            foreach(string line in modListWithHashes)
             {
-                //Console.WriteLine(MAINARMAPATH + "@" + modList[x]);
-                modHashes[x] = verifyMod(MAINARMAPATH + "@" + modList[x]);
-                //Console.WriteLine(modList[x]);
+                int splitter = line.IndexOf(" ");
+                Console.WriteLine(line.Substring(splitter + 1));
+                modHashesFromServer.Add(line.Substring(splitter + 1));
+                Console.WriteLine(line.Substring(0, splitter));
+                modListFromServer.Add(line.Substring(0, splitter));
             }
         }
-
 
         private string verifyMod(string path)
         {
@@ -150,51 +89,75 @@ namespace LegionLauncher
                     md5.TransformFinalBlock(contentBytes, 0, contentBytes.Length);
                 else
                     md5.TransformBlock(contentBytes, 0, contentBytes.Length, contentBytes, 0);
+                
             }
-
             return BitConverter.ToString(md5.Hash).Replace("-", "").ToLower();
         }
 
-        private void currentModsViewBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void verificationOfMod(string path, Label label, Button button, int hashIndex)
         {
-
-        }
-
-        private void SetText(string text)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.verifyModsButton.InvokeRequired)
+            downloadInfoFromServer.Join();
+            if (Directory.Exists(path))
             {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.verifyModsButton.Text = text;
-            }
-        }
-
-        private void AddItem(Boolean verified, int index)
-        {
-            if (this.currentModsListBox.InvokeRequired)
-            {
-                AddItemCallback d = new AddItemCallback(AddItem);
-                this.Invoke(d, new object[] { verified, index });
-            }
-            else
-            {
-                foreach (ListViewItem li in currentModsListBox.Items)
+                //DON'T FORGET TO CHANGE THE INDEX
+                if (verifyMod(path).Equals(modHashesFromServer[hashIndex]))
                 {
-                    if (li.Index == index && !verified)
-                        li.ForeColor = Color.Red;
-                    if (li.Index == index && verified)
-                        li.ForeColor = Color.Green;
+                    Invoke(new Action(() => button.Text = "VERIFIED!"));
+                    Invoke(new Action(() => label.BackColor = System.Drawing.Color.Green));
+                }
+                else
+                {
+                    Invoke(new Action(() => button.Text = "FAILED!"));
+                    Invoke(new Action(() => label.BackColor = System.Drawing.Color.Red));
                 }
             }
+            else
+            {
+                Invoke(new Action(() => button.Text = "FAILED!"));
+                Invoke(new Action(() => label.BackColor = System.Drawing.Color.Red));
+            }
+        }
 
-            
+        private void asdgVerifyButton_Click(object sender, EventArgs e)
+        {
+            asdgVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@ASDG_JR", asdgModLabel, asdgVerifyButton, 1); });
+        }
+
+        private void cupVerifyButton_Click(object sender, EventArgs e)
+        {
+            cupVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@CUP_Weapons", cupModLabel, cupVerifyButton, 5);});
+        }
+
+        private void taviVerifyButton_Click(object sender, EventArgs e)
+        {
+            taviVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@TavianaA3", taviModLabel, taviVerifyButton, 4); });
+        }
+
+        private void afrfVerifyButton_Click(object sender, EventArgs e)
+        {
+            afrfVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@RHSAFRF", afrfModLabel, afrfVerifyButton, 2); });
+        }
+
+        private void usafVerifyButton_Click(object sender, EventArgs e)
+        {
+            usafVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@RHSUSAF", usafModLabel, usafVerifyButton, 3); });
+        }
+
+        private void aiaVerifyButton_Click(object sender, EventArgs e)
+        {
+            aiaVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@AllinArmaTerrainPack", aiaModLabel, aiaVerifyButton, 0); });
+        }
+
+        private void exileVerifyButton_Click(object sender, EventArgs e)
+        {
+            exileVerifyButton.Text = "VERIFING";
+            ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@Exile", exileModLabel, exileVerifyButton, 6); });
         }
     }
 }

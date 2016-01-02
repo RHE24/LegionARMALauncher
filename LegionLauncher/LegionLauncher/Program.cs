@@ -26,7 +26,7 @@ namespace LegionLauncher
             ArmA3ServerInfo taviServer1 = getServerInfo("158.69.118.212", 2319);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(armaPath, getMods(armaPath), taviServer1.ServerInfo.MaxPlayers
+            Application.Run(new MainForm(armaPath, taviServer1.ServerInfo.MaxPlayers
                 , taviServer1.ServerInfo.NumPlayers));
         }
 
@@ -51,24 +51,8 @@ namespace LegionLauncher
             {
                 return "Could not find ARMA directory";
             }
-            return arma_path;
-            
-            
+            return arma_path;     
         }
-        static List<string> getMods(string arma_path)
-        {
-            string[] raw_mods = Directory.GetDirectories(arma_path);
-            List<string> mods = new List<string>();
-            foreach (string directoryName in raw_mods)
-            {
-                if (directoryName.Contains("\\@"))
-                {
-                    mods.Add(directoryName.Replace(arma_path+"@", ""));
-                }
-            }
-            return mods;
-        }
-
         
         static ArmA3ServerInfo getServerInfo(string ipAddr, int port)
         {
