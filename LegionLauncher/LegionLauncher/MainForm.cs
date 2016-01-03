@@ -41,7 +41,7 @@ namespace LegionLauncher
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C \"" + MAINARMAPATH + "arma3.exe\" -nosplash -mod=AllInArmaTerrainPack;Exile;RHSAFRF;RHSUSAF;TavianaA3;ASDG_JR;CUP_Weapons -connect=158.69.118.212 -port=2318";
+            startInfo.Arguments = "/C \"" + MAINARMAPATH + "arma3.exe\" -nosplash -mod=@AllInArmaTerrainPack;@Exile;@RHSAFRF;@RHSUSAF;@TavianaA3;@ASDG_JR;@CUP_Weapons -connect=158.69.118.212 -port=2318";
             process.StartInfo = startInfo;
             process.Start();
         }
