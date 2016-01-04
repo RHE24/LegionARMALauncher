@@ -50,7 +50,6 @@ namespace LegionLauncher
             this.afrfModLabel = new System.Windows.Forms.Label();
             this.taviModLabel = new System.Windows.Forms.Label();
             this.cupModLabel = new System.Windows.Forms.Label();
-            this.armaPath = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.servers.SuspendLayout();
             this.mods.SuspendLayout();
@@ -64,13 +63,14 @@ namespace LegionLauncher
             this.mainTabControl.Location = new System.Drawing.Point(0, 0);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(521, 547);
+            this.mainTabControl.Size = new System.Drawing.Size(808, 479);
             this.mainTabControl.TabIndex = 0;
             // 
             // servers
             // 
             this.servers.BackColor = System.Drawing.Color.Transparent;
-            this.servers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.servers.BackgroundImage = global::LegionLauncher.Properties.Resources.legiongaminglauncherMods;
+            this.servers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.servers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.servers.Controls.Add(this.serverOneLaunchButton);
             this.servers.Controls.Add(this.playersPlaceholder);
@@ -78,13 +78,13 @@ namespace LegionLauncher
             this.servers.Location = new System.Drawing.Point(4, 22);
             this.servers.Name = "servers";
             this.servers.Padding = new System.Windows.Forms.Padding(3);
-            this.servers.Size = new System.Drawing.Size(513, 521);
+            this.servers.Size = new System.Drawing.Size(800, 453);
             this.servers.TabIndex = 0;
             this.servers.Text = "Legion Servers";
             // 
             // serverOneLaunchButton
             // 
-            this.serverOneLaunchButton.Location = new System.Drawing.Point(366, 42);
+            this.serverOneLaunchButton.Location = new System.Drawing.Point(515, 237);
             this.serverOneLaunchButton.Name = "serverOneLaunchButton";
             this.serverOneLaunchButton.Size = new System.Drawing.Size(122, 56);
             this.serverOneLaunchButton.TabIndex = 3;
@@ -96,7 +96,7 @@ namespace LegionLauncher
             // 
             this.playersPlaceholder.AutoSize = true;
             this.playersPlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playersPlaceholder.Location = new System.Drawing.Point(8, 73);
+            this.playersPlaceholder.Location = new System.Drawing.Point(157, 268);
             this.playersPlaceholder.Name = "playersPlaceholder";
             this.playersPlaceholder.Size = new System.Drawing.Size(202, 25);
             this.playersPlaceholder.TabIndex = 2;
@@ -106,7 +106,7 @@ namespace LegionLauncher
             // 
             this.serverNamePlaceholder.AutoSize = true;
             this.serverNamePlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serverNamePlaceholder.Location = new System.Drawing.Point(3, 42);
+            this.serverNamePlaceholder.Location = new System.Drawing.Point(152, 237);
             this.serverNamePlaceholder.Name = "serverNamePlaceholder";
             this.serverNamePlaceholder.Size = new System.Drawing.Size(323, 31);
             this.serverNamePlaceholder.TabIndex = 0;
@@ -115,7 +115,9 @@ namespace LegionLauncher
             // mods
             // 
             this.mods.BackColor = System.Drawing.Color.Black;
+            this.mods.BackgroundImage = global::LegionLauncher.Properties.Resources.legiongamelauncherServer;
             this.mods.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.mods.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.mods.Controls.Add(this.exileDownloadButton);
             this.mods.Controls.Add(this.exileVerifyButton);
             this.mods.Controls.Add(this.exileModLabel);
@@ -137,17 +139,16 @@ namespace LegionLauncher
             this.mods.Controls.Add(this.afrfModLabel);
             this.mods.Controls.Add(this.taviModLabel);
             this.mods.Controls.Add(this.cupModLabel);
-            this.mods.Controls.Add(this.armaPath);
             this.mods.Location = new System.Drawing.Point(4, 22);
             this.mods.Name = "mods";
             this.mods.Padding = new System.Windows.Forms.Padding(3);
-            this.mods.Size = new System.Drawing.Size(513, 521);
+            this.mods.Size = new System.Drawing.Size(800, 453);
             this.mods.TabIndex = 1;
             this.mods.Text = "Mods";
             // 
             // exileDownloadButton
             // 
-            this.exileDownloadButton.Location = new System.Drawing.Point(343, 427);
+            this.exileDownloadButton.Location = new System.Drawing.Point(490, 363);
             this.exileDownloadButton.Name = "exileDownloadButton";
             this.exileDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.exileDownloadButton.TabIndex = 24;
@@ -157,7 +158,7 @@ namespace LegionLauncher
             // 
             // exileVerifyButton
             // 
-            this.exileVerifyButton.Location = new System.Drawing.Point(233, 427);
+            this.exileVerifyButton.Location = new System.Drawing.Point(380, 363);
             this.exileVerifyButton.Name = "exileVerifyButton";
             this.exileVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.exileVerifyButton.TabIndex = 23;
@@ -168,9 +169,9 @@ namespace LegionLauncher
             // exileModLabel
             // 
             this.exileModLabel.AutoSize = true;
-            this.exileModLabel.BackColor = System.Drawing.Color.White;
+            this.exileModLabel.BackColor = System.Drawing.Color.Transparent;
             this.exileModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.exileModLabel.Location = new System.Drawing.Point(29, 430);
+            this.exileModLabel.Location = new System.Drawing.Point(176, 366);
             this.exileModLabel.Name = "exileModLabel";
             this.exileModLabel.Size = new System.Drawing.Size(45, 20);
             this.exileModLabel.TabIndex = 22;
@@ -178,7 +179,7 @@ namespace LegionLauncher
             // 
             // aiaDownloadButton
             // 
-            this.aiaDownloadButton.Location = new System.Drawing.Point(343, 398);
+            this.aiaDownloadButton.Location = new System.Drawing.Point(490, 334);
             this.aiaDownloadButton.Name = "aiaDownloadButton";
             this.aiaDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.aiaDownloadButton.TabIndex = 21;
@@ -188,7 +189,7 @@ namespace LegionLauncher
             // 
             // usafDownloadButton
             // 
-            this.usafDownloadButton.Location = new System.Drawing.Point(343, 370);
+            this.usafDownloadButton.Location = new System.Drawing.Point(490, 306);
             this.usafDownloadButton.Name = "usafDownloadButton";
             this.usafDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.usafDownloadButton.TabIndex = 20;
@@ -198,7 +199,7 @@ namespace LegionLauncher
             // 
             // afrfDownloadButton
             // 
-            this.afrfDownloadButton.Location = new System.Drawing.Point(343, 342);
+            this.afrfDownloadButton.Location = new System.Drawing.Point(490, 278);
             this.afrfDownloadButton.Name = "afrfDownloadButton";
             this.afrfDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.afrfDownloadButton.TabIndex = 19;
@@ -208,7 +209,7 @@ namespace LegionLauncher
             // 
             // taviDownloadButton
             // 
-            this.taviDownloadButton.Location = new System.Drawing.Point(343, 314);
+            this.taviDownloadButton.Location = new System.Drawing.Point(490, 250);
             this.taviDownloadButton.Name = "taviDownloadButton";
             this.taviDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.taviDownloadButton.TabIndex = 18;
@@ -218,7 +219,7 @@ namespace LegionLauncher
             // 
             // cupDownloadButton
             // 
-            this.cupDownloadButton.Location = new System.Drawing.Point(343, 286);
+            this.cupDownloadButton.Location = new System.Drawing.Point(490, 222);
             this.cupDownloadButton.Name = "cupDownloadButton";
             this.cupDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.cupDownloadButton.TabIndex = 17;
@@ -228,7 +229,7 @@ namespace LegionLauncher
             // 
             // asdgDownloadButton
             // 
-            this.asdgDownloadButton.Location = new System.Drawing.Point(343, 258);
+            this.asdgDownloadButton.Location = new System.Drawing.Point(490, 194);
             this.asdgDownloadButton.Name = "asdgDownloadButton";
             this.asdgDownloadButton.Size = new System.Drawing.Size(94, 23);
             this.asdgDownloadButton.TabIndex = 16;
@@ -238,7 +239,7 @@ namespace LegionLauncher
             // 
             // aiaVerifyButton
             // 
-            this.aiaVerifyButton.Location = new System.Drawing.Point(233, 398);
+            this.aiaVerifyButton.Location = new System.Drawing.Point(380, 334);
             this.aiaVerifyButton.Name = "aiaVerifyButton";
             this.aiaVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.aiaVerifyButton.TabIndex = 15;
@@ -248,7 +249,7 @@ namespace LegionLauncher
             // 
             // usafVerifyButton
             // 
-            this.usafVerifyButton.Location = new System.Drawing.Point(233, 370);
+            this.usafVerifyButton.Location = new System.Drawing.Point(380, 306);
             this.usafVerifyButton.Name = "usafVerifyButton";
             this.usafVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.usafVerifyButton.TabIndex = 14;
@@ -258,7 +259,7 @@ namespace LegionLauncher
             // 
             // afrfVerifyButton
             // 
-            this.afrfVerifyButton.Location = new System.Drawing.Point(233, 342);
+            this.afrfVerifyButton.Location = new System.Drawing.Point(380, 278);
             this.afrfVerifyButton.Name = "afrfVerifyButton";
             this.afrfVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.afrfVerifyButton.TabIndex = 13;
@@ -268,7 +269,7 @@ namespace LegionLauncher
             // 
             // taviVerifyButton
             // 
-            this.taviVerifyButton.Location = new System.Drawing.Point(233, 314);
+            this.taviVerifyButton.Location = new System.Drawing.Point(380, 250);
             this.taviVerifyButton.Name = "taviVerifyButton";
             this.taviVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.taviVerifyButton.TabIndex = 12;
@@ -278,7 +279,7 @@ namespace LegionLauncher
             // 
             // cupVerifyButton
             // 
-            this.cupVerifyButton.Location = new System.Drawing.Point(233, 286);
+            this.cupVerifyButton.Location = new System.Drawing.Point(380, 222);
             this.cupVerifyButton.Name = "cupVerifyButton";
             this.cupVerifyButton.Size = new System.Drawing.Size(75, 23);
             this.cupVerifyButton.TabIndex = 11;
@@ -288,7 +289,7 @@ namespace LegionLauncher
             // 
             // asdgVerifyButton
             // 
-            this.asdgVerifyButton.Location = new System.Drawing.Point(233, 258);
+            this.asdgVerifyButton.Location = new System.Drawing.Point(380, 194);
             this.asdgVerifyButton.Name = "asdgVerifyButton";
             this.asdgVerifyButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.asdgVerifyButton.Size = new System.Drawing.Size(75, 23);
@@ -300,9 +301,9 @@ namespace LegionLauncher
             // asdgModLabel
             // 
             this.asdgModLabel.AutoSize = true;
-            this.asdgModLabel.BackColor = System.Drawing.Color.White;
+            this.asdgModLabel.BackColor = System.Drawing.Color.Transparent;
             this.asdgModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.asdgModLabel.Location = new System.Drawing.Point(29, 261);
+            this.asdgModLabel.Location = new System.Drawing.Point(176, 197);
             this.asdgModLabel.Name = "asdgModLabel";
             this.asdgModLabel.Size = new System.Drawing.Size(141, 20);
             this.asdgModLabel.TabIndex = 9;
@@ -311,9 +312,9 @@ namespace LegionLauncher
             // aiaModLabel
             // 
             this.aiaModLabel.AutoSize = true;
-            this.aiaModLabel.BackColor = System.Drawing.Color.White;
+            this.aiaModLabel.BackColor = System.Drawing.Color.Transparent;
             this.aiaModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.aiaModLabel.Location = new System.Drawing.Point(29, 401);
+            this.aiaModLabel.Location = new System.Drawing.Point(176, 337);
             this.aiaModLabel.Name = "aiaModLabel";
             this.aiaModLabel.Size = new System.Drawing.Size(149, 20);
             this.aiaModLabel.TabIndex = 8;
@@ -322,9 +323,9 @@ namespace LegionLauncher
             // usafModLabel
             // 
             this.usafModLabel.AutoSize = true;
-            this.usafModLabel.BackColor = System.Drawing.Color.White;
+            this.usafModLabel.BackColor = System.Drawing.Color.Transparent;
             this.usafModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.usafModLabel.Location = new System.Drawing.Point(29, 373);
+            this.usafModLabel.Location = new System.Drawing.Point(176, 309);
             this.usafModLabel.Name = "usafModLabel";
             this.usafModLabel.Size = new System.Drawing.Size(94, 20);
             this.usafModLabel.TabIndex = 7;
@@ -333,9 +334,9 @@ namespace LegionLauncher
             // afrfModLabel
             // 
             this.afrfModLabel.AutoSize = true;
-            this.afrfModLabel.BackColor = System.Drawing.Color.White;
+            this.afrfModLabel.BackColor = System.Drawing.Color.Transparent;
             this.afrfModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.afrfModLabel.Location = new System.Drawing.Point(29, 345);
+            this.afrfModLabel.Location = new System.Drawing.Point(176, 281);
             this.afrfModLabel.Name = "afrfModLabel";
             this.afrfModLabel.Size = new System.Drawing.Size(93, 20);
             this.afrfModLabel.TabIndex = 6;
@@ -344,9 +345,9 @@ namespace LegionLauncher
             // taviModLabel
             // 
             this.taviModLabel.AutoSize = true;
-            this.taviModLabel.BackColor = System.Drawing.Color.White;
+            this.taviModLabel.BackColor = System.Drawing.Color.Transparent;
             this.taviModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.taviModLabel.Location = new System.Drawing.Point(29, 317);
+            this.taviModLabel.Location = new System.Drawing.Point(176, 253);
             this.taviModLabel.Name = "taviModLabel";
             this.taviModLabel.Size = new System.Drawing.Size(129, 20);
             this.taviModLabel.TabIndex = 5;
@@ -355,34 +356,23 @@ namespace LegionLauncher
             // cupModLabel
             // 
             this.cupModLabel.AutoSize = true;
-            this.cupModLabel.BackColor = System.Drawing.Color.White;
+            this.cupModLabel.BackColor = System.Drawing.Color.Transparent;
             this.cupModLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.cupModLabel.Location = new System.Drawing.Point(29, 289);
+            this.cupModLabel.Location = new System.Drawing.Point(176, 225);
             this.cupModLabel.Name = "cupModLabel";
             this.cupModLabel.Size = new System.Drawing.Size(119, 20);
             this.cupModLabel.TabIndex = 4;
             this.cupModLabel.Text = "CUP Weapons";
             // 
-            // armaPath
-            // 
-            this.armaPath.AutoSize = true;
-            this.armaPath.BackColor = System.Drawing.Color.Green;
-            this.armaPath.ForeColor = System.Drawing.Color.White;
-            this.armaPath.Location = new System.Drawing.Point(193, 37);
-            this.armaPath.Name = "armaPath";
-            this.armaPath.Size = new System.Drawing.Size(115, 13);
-            this.armaPath.TabIndex = 0;
-            this.armaPath.Text = "Arma Path Placeholder";
-            // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(521, 547);
+            this.ClientSize = new System.Drawing.Size(808, 479);
             this.Controls.Add(this.mainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Legion ARMA Launcher";
+            this.Text = "Legion ARMA Launcher ALPHA v0.2";
             this.mainTabControl.ResumeLayout(false);
             this.servers.ResumeLayout(false);
             this.servers.PerformLayout();
@@ -397,7 +387,6 @@ namespace LegionLauncher
         private System.Windows.Forms.TabPage servers;
         private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.TabPage mods;
-        private System.Windows.Forms.Label armaPath;
         private System.Windows.Forms.Label serverNamePlaceholder;
         private System.Windows.Forms.Label playersPlaceholder;
         private System.Windows.Forms.Button serverOneLaunchButton;
