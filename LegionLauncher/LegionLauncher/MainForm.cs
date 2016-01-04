@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO.Compression;
 
 namespace LegionLauncher
 {
@@ -16,7 +17,7 @@ namespace LegionLauncher
     {
         string MAINARMAPATH;
         Thread downloadInfoFromServer;
-        Thread verify;
+        Dictionary<string, string> modsDownloadLinks;
         string[] modListWithHashes;
         List<string> modListFromServer;
         List<string> modHashesFromServer;
@@ -24,6 +25,8 @@ namespace LegionLauncher
         public MainForm(String arma_Path, int maxPlayers, int numPlayers)
         {
             InitializeComponent();
+            modsDownloadLinks = new Dictionary<string, string>();
+            makeModDictionary();
             ThreadPool.SetMaxThreads(2, 2);
             modListFromServer = new List<string>();
             modHashesFromServer = new List<string>();
@@ -33,6 +36,17 @@ namespace LegionLauncher
             this.armaPath.Text = arma_Path;
             this.serverNamePlaceholder.Text = "LEGION Taviana Server 1";
             this.playersPlaceholder.Text = numPlayers + "\\" + maxPlayers + " players online";
+        }
+
+        private void makeModDictionary()
+        {
+            modsDownloadLinks.Add("aia", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@AllInArmaTerrainPack.zip");
+            modsDownloadLinks.Add("tavi", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@TavianaA3.zip");
+            modsDownloadLinks.Add("cup", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@CUP_Weapons.zip");
+            modsDownloadLinks.Add("usaf", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@RHSUSAF.zip");
+            modsDownloadLinks.Add("afrf", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@RHSAFRF.zip");
+            modsDownloadLinks.Add("exile", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@Exile.zip");
+            modsDownloadLinks.Add("asdg", "https://googledrive.com/host/0BzpVa7TGxQTBXy11ZTBhejVIRlE/@ASDG_JR.zip");
         }
 
         private void serverOneLaunchButton_Click(object sender, EventArgs e)
@@ -117,6 +131,17 @@ namespace LegionLauncher
                 Invoke(new Action(() => label.BackColor = System.Drawing.Color.Red));
             }
         }
+        private void downloadMod(string modName, string modLink, Button button)
+        {
+            WebClient webClient = new WebClient();
+            Console.WriteLine(modLink);
+            webClient.DownloadFile(modLink, MAINARMAPATH + "\\"+modName+".zip");
+            Invoke(new Action(() => button.Text = "UNZIPPING!"));
+            ZipFile.ExtractToDirectory(MAINARMAPATH + "\\" + modName + ".zip", MAINARMAPATH);
+            File.Delete(MAINARMAPATH + "\\" + modName + ".zip");
+            Invoke(new Action(() => button.Text = "INSTALLED!\nNOW VERIFY!"));
+        }
+
 
         private void asdgVerifyButton_Click(object sender, EventArgs e)
         {
@@ -158,6 +183,48 @@ namespace LegionLauncher
         {
             exileVerifyButton.Text = "VERIFING";
             ThreadPool.QueueUserWorkItem(s => { verificationOfMod(MAINARMAPATH + "\\@Exile", exileModLabel, exileVerifyButton, 6); });
+        }
+
+        private void asdgDownloadButton_Click(object sender, EventArgs e)
+        {
+            asdgDownloadButton.Text = "DOWNLADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("asdg", modsDownloadLinks["asdg"], asdgDownloadButton); });
+        }
+
+        private void cupDownloadButton_Click(object sender, EventArgs e)
+        {
+            cupDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("cup", modsDownloadLinks["cup"], cupDownloadButton); });
+        }
+
+        private void taviDownloadButton_Click(object sender, EventArgs e)
+        {
+            taviDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("tavi", modsDownloadLinks["tavi"], taviDownloadButton); });
+        }
+
+        private void afrfDownloadButton_Click(object sender, EventArgs e)
+        {
+            afrfDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("afrf", modsDownloadLinks["afrf"], afrfDownloadButton); });
+        }
+
+        private void usafDownloadButton_Click(object sender, EventArgs e)
+        {
+            usafDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("usaf", modsDownloadLinks["usaf"], usafDownloadButton); });
+        }
+
+        private void aiaDownloadButton_Click(object sender, EventArgs e)
+        {
+            aiaDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("aia", modsDownloadLinks["aia"], aiaDownloadButton); });
+        }
+
+        private void exileDownloadButton_Click(object sender, EventArgs e)
+        {
+            exileDownloadButton.Text = "DOWNLOADING";
+            ThreadPool.QueueUserWorkItem(s => { downloadMod("exile", modsDownloadLinks["exile"], exileDownloadButton); });
         }
     }
 }

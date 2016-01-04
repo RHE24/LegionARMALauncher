@@ -153,6 +153,7 @@ namespace LegionLauncher
             this.exileDownloadButton.TabIndex = 24;
             this.exileDownloadButton.Text = "DOWNLOAD";
             this.exileDownloadButton.UseVisualStyleBackColor = true;
+            this.exileDownloadButton.Click += new System.EventHandler(this.exileDownloadButton_Click);
             // 
             // exileVerifyButton
             // 
@@ -183,6 +184,7 @@ namespace LegionLauncher
             this.aiaDownloadButton.TabIndex = 21;
             this.aiaDownloadButton.Text = "DOWNLOAD";
             this.aiaDownloadButton.UseVisualStyleBackColor = true;
+            this.aiaDownloadButton.Click += new System.EventHandler(this.aiaDownloadButton_Click);
             // 
             // usafDownloadButton
             // 
@@ -192,6 +194,7 @@ namespace LegionLauncher
             this.usafDownloadButton.TabIndex = 20;
             this.usafDownloadButton.Text = "DOWNLOAD";
             this.usafDownloadButton.UseVisualStyleBackColor = true;
+            this.usafDownloadButton.Click += new System.EventHandler(this.usafDownloadButton_Click);
             // 
             // afrfDownloadButton
             // 
@@ -201,6 +204,7 @@ namespace LegionLauncher
             this.afrfDownloadButton.TabIndex = 19;
             this.afrfDownloadButton.Text = "DOWNLOAD";
             this.afrfDownloadButton.UseVisualStyleBackColor = true;
+            this.afrfDownloadButton.Click += new System.EventHandler(this.afrfDownloadButton_Click);
             // 
             // taviDownloadButton
             // 
@@ -210,6 +214,7 @@ namespace LegionLauncher
             this.taviDownloadButton.TabIndex = 18;
             this.taviDownloadButton.Text = "DOWNLOAD";
             this.taviDownloadButton.UseVisualStyleBackColor = true;
+            this.taviDownloadButton.Click += new System.EventHandler(this.taviDownloadButton_Click);
             // 
             // cupDownloadButton
             // 
@@ -219,6 +224,7 @@ namespace LegionLauncher
             this.cupDownloadButton.TabIndex = 17;
             this.cupDownloadButton.Text = "DOWNLOAD";
             this.cupDownloadButton.UseVisualStyleBackColor = true;
+            this.cupDownloadButton.Click += new System.EventHandler(this.cupDownloadButton_Click);
             // 
             // asdgDownloadButton
             // 
@@ -228,6 +234,7 @@ namespace LegionLauncher
             this.asdgDownloadButton.TabIndex = 16;
             this.asdgDownloadButton.Text = "DOWNLOAD";
             this.asdgDownloadButton.UseVisualStyleBackColor = true;
+            this.asdgDownloadButton.Click += new System.EventHandler(this.asdgDownloadButton_Click);
             // 
             // aiaVerifyButton
             // 
