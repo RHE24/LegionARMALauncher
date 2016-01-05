@@ -318,7 +318,8 @@ namespace LegionLauncher
             this.aiaModLabel.Name = "aiaModLabel";
             this.aiaModLabel.Size = new System.Drawing.Size(149, 20);
             this.aiaModLabel.TabIndex = 8;
-            this.aiaModLabel.Text = "All in Arma Terrian";
+            this.aiaModLabel.Text = "All in Arma Terrain";
+            this.aiaModLabel.Click += new System.EventHandler(this.aiaModLabel_Click);
             // 
             // usafModLabel
             // 
@@ -372,7 +373,7 @@ namespace LegionLauncher
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Legion ARMA Launcher ALPHA v0.2";
+            this.Text = "Legion ARMA Launcher ALPHA v0.1.2";
             this.mainTabControl.ResumeLayout(false);
             this.servers.ResumeLayout(false);
             this.servers.PerformLayout();

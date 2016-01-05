@@ -239,5 +239,10 @@ namespace LegionLauncher
             Thread download = new Thread(s => downloadMod("exile", modsDownloadLinks["exile"], exileDownloadButton, "@Exile"));
             download.Start();
         }
+
+        private void aiaModLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
